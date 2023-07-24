@@ -1,5 +1,1 @@
-<details>
-
-###C_Basic
-
-</details>
+<details>*C_Basic</details>
