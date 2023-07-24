@@ -36,20 +36,43 @@
 ### Cú pháp con trỏ.
 `Kiểu_dữ_liệu* tên_con_trỏ`
 #### Ví dụ:
-`int *ptr; // Con trỏ kiểu số nguyên
- float *ptr; // Con trỏ kiểu số thực
- void *ptr; // Con trỏ không có kiểu dữ liệu trả về 
- int *ptr[]; // Con trỏ kiểu mảng có kiểu số nguyên
- void *ptr[]; // Con trỏ kiểu mảng không có kiểu dữ liệu trả về`
+- `int *ptr; // Con trỏ kiểu số nguyên`
+- `float *ptr; // Con trỏ kiểu số thực`
+- `void *ptr; // Con trỏ không có kiểu dữ liệu trả về` 
+- `int *ptr[]; // Con trỏ kiểu mảng có kiểu số nguyên`
+- `void *ptr[]; // Con trỏ kiểu mảng không có kiểu dữ liệu trả về`
 
-### Một số lưu ý khi sử dụng con trỏ.
+### Lưu ý khi sử dụng con trỏ.
 #### Kiểu dữ liệu của biến chứa giá trị khi ta tạo một con trỏ thì con trỏ đó cũng phải giống kiểu dữ liệu của biến đó.
 
 #### Ví dụ:
 - `int a = 10; // a là biến có kiểu dữ liệu số nguyên`
-- `int *ptr = &a; // ptr là con trỏ trỏ đến địa chỉ biến a và con trỏ phải là con trỏ kiểu dữ liệu số nguyên`
+- `char b = 'c' // y là biến có kiểu dữ liệu ký tự`
+- `int *ptr = &a; // ptr là con trỏ trỏ đến địa chỉ biến a và con trỏ phải là con trỏ kiểu dữ liệu số nguyên nên chương trình đúng.`
+- `float *ptrr = &b // ptrr là con trỏ trỏ đến địa chỉ biến b nhưng mà con trỏ có kiểu dữ liệu khác kiểu dữ liệu biến b nên chương trình sai.`
 
+### Con trỏ NULL
 
+Con trỏ NULL là con trỏ có địa chỉ 0x00 đây là con trỏ ứng dụng rất nhiều vào các dự án thực tế vì tính ổn định và dễ kiểm soát chương trình và khi các biến con trỏ mà ta không sử dụng thì nên gán NULL.
+
+#### Ví dụ:
+- `int *ptr; // đây là con trỏ chưa khởi tạo và trỏ đến một địa chỉ bất kì.`
+- `int *ptrr = NULL; // đây là con trỏ có giá trị 0x00.`
+
+### Pointer to Pointer
+
+Là một con trỏ trỏ đến địa chỉ của một con trỏ khác. Sử dụng rất nhiều vào các bài toán Linker list.
+
+#### Ví dụ:
+```c
+ int a = 20;
+ int *ptr = &a;
+ int **ptp = &ptr;
+ printf("Gia tri của a la: %d\n, *ptr"); // a = 10;
+ printf("Dia chi của a la: %d\n", ptr); // Địa chỉ a: 0x
+ printf("Gia tri cua a la: %d\n", **ptp); // a = 10;
+ printf("Dia chi cua a la: %d\n", ptp); // Địa chỉ a: 0x
+```
 
 </details>
 
