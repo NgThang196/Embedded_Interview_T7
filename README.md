@@ -1,1 +1,2 @@
-1.C_BASIC
+C_BASIC
+Biến trong C
