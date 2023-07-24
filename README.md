@@ -3,7 +3,9 @@
 
 
 
-Biến
+<details>
+
+<summary>Biến</summary>
 
 - Một biến trong C là tên của vị trí bộ nhớ. Nó được sử dụng để lưu trữ dữ liệu. Giá trị của nó có thể được thay đổi và nó có thể được sử dụng lại nhiều lần. Mỗi biến trong C có một loại dữ liệu cụ thể, xác định kích thước của bộ nhớ của biến; phạm vi các giá trị có thể được lưu trữ trong bộ nhớ đó.Tên của một biến có thể bao gồm các chữ cái, chữ số và ký tự gạch dưới
 
@@ -23,6 +25,7 @@ Biến
 - Biến
 - Biến
 
+</details>
 
 <details>
 
