@@ -36,18 +36,20 @@
 ### Cú pháp con trỏ.
 `Kiểu_dữ_liệu* tên_con_trỏ`
 #### Ví dụ:
-- `int *ptr; // Con trỏ kiểu số nguyên`
-- `float *ptr; // Con trỏ kiểu số thực`
-- `void *ptr; // Con trỏ không có kiểu dữ liệu trả về `
-- `int *ptr[]; // Con trỏ kiểu mảng có kiểu số nguyên`
-- `void *ptr[]; // Con trỏ kiểu mảng không có kiểu dữ liệu trả về`
+`int *ptr; // Con trỏ kiểu số nguyên
+ float *ptr; // Con trỏ kiểu số thực
+ void *ptr; // Con trỏ không có kiểu dữ liệu trả về 
+ int *ptr[]; // Con trỏ kiểu mảng có kiểu số nguyên
+ void *ptr[]; // Con trỏ kiểu mảng không có kiểu dữ liệu trả về`
 
-#### Một số lưu ý khi sử dụng con trỏ.
-- Kiểu dữ liệu của biến chứa giá trị khi ta tạo một con trỏ thì con trỏ đó cũng phải giống kiểu dữ liệu của biến đó.
+### Một số lưu ý khi sử dụng con trỏ.
+#### Kiểu dữ liệu của biến chứa giá trị khi ta tạo một con trỏ thì con trỏ đó cũng phải giống kiểu dữ liệu của biến đó.
 
 #### Ví dụ:
 - `int a = 10; // a là biến có kiểu dữ liệu số nguyên`
 - `int *ptr = &a; // ptr là con trỏ trỏ đến địa chỉ biến a và con trỏ phải là con trỏ kiểu dữ liệu số nguyên`
+
+
 
 </details>
 
