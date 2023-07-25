@@ -174,12 +174,19 @@ int main(){
 #include <stdlib.h>
 
 int main(){
-    uint16_t *ptr = (uint16_t *)malloc(10); //Cần 5 ô nhớ và uint16_t -> 2 byte/1 ô nhớ. Vậy malloc cần 10 byte.
+    uint16_t *ptr = (uint16_t *)malloc(sizeof(uint16_t)*5); //Cần 5 ô nhớ và uint16_t -> 2 byte/1 ô nhớ. Vậy malloc cần 5x2 = 10 byte.
     for(int i = 0; i < 5; i++){
         ptr[i] = 2*i;
     }
     for(int i = 0; i < 5; i++){
-        printf("i = %d`n", ptr[i]);
+        printf("i = %d\n", ptr[i]);
+    }
+    ptr =(uint16_t *)realloc(ptr, sizeof(uint16_t)*7); //Thay đổi 5 ô nhớ thành 7 ô nhớ bằng realloc
+    for(int i = 0; i < 7; i++){
+        ptr[i] = 2*i;
+    }
+    for(int i = 0; i < 7; i++){
+        printf("i = %d\n", ptr[i]);
     }
     return 0;
 }
