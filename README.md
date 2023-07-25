@@ -571,11 +571,117 @@ void test(){
 
 <summary>StructUnion</summary>
 
+## Struct
+- Struct là kiểu dữ liệu do người dùng tự định nghĩa
+```c
+struct structureName 
+{
+    dataType member1;
+    dataType member2;
+    ...
+};
+```
+### Ví dụ:
+```c
+#include <stdio.h>
+typedef struct{
+    int x;
+    int y;
+}toado;
+int main(){
+    toado M ={10, 12}; // điểm M có tọa độ x là 10 y là 12
+    toado M ={.x=10}; // M(10,0)
+    toado M ={.y=12}; // M(0,12)
+    return 0;
+}
+```
+### Áp dụng Struct trong quản lý bộ nhớ
+```c
+#include <stdio.h>
+#include <stdint.h>
+typedef struct{
+    uint16_t x[10]; //4x2+4x2+2x2+ 4byte
+    uint8_t  y[5];  //1+ 1x4 + 3byte bộ nhớ đệm
+    uint32_t z[8];  //1x4+2x4+2x4+2x4
+}use;
+int main(){
+    printf("size: %lu\n",sizeof(use)); // 60
+    return 0;
+}
+```
+## Union
+- Union là kiểu dữ liệu do người dùng định nghĩa
+```c
+union structureName 
+{
+    dataType member1;
+    dataType member2;
+    ...
+};
+```
+### Áp dụng Union trong quản lý bộ nhớ
+```c
+#include <stdio.h>
+#include <stdint.h>
+typedef union{
+    uint8_t var1;         //1 byte
+    uint16_t var2[10];    //2 bytes + 4 bytes
+    uint64_t var3;        //8 bytes
+}typeUnion;
+int main(){
+    printf("size: %lu\n",sizeof(typeUnion));
+    return 0;
+}
+```
+### Kết hợp Struct và Union trong việc truy xuất Data
+```c
+#include <stdio.h>
+#include <stdint.h>
+
+typedef union
+{
+    struct
+    {
+        uint8_t ID[2];
+        uint8_t Data[3];
+        uint8_t checkSum[1];
+    }object;
+    uint8_t array[6];
+}dataFrame;
+
+
+int main(int argc, char const* argv[])
+{
+
+    dataFrame test;
+
+    test.object.ID[0] = 0x01;
+    test.object.ID[1] = 0x02;
+
+    test.object.Data[0] = 0x10;
+    test.object.Data[1] = 0xA2;
+    test.object.Data[2] = 0xB4;
+
+    test.object.checkSum[0] = 0xF2;
+
+    return 0;
+}
+```
 </details>
 
 <details>
 
 <summary>Compiler</summary>
+
+Quy trình dịch là quá trình chuyển đổi từ ngôn ngữ bậc cao (NNBC) (C/C++, Pascal, Java, C#…) sang ngôn ngữ đích (ngôn ngữ máy) để máy tính có thể hiểu và thực thi. Ngôn ngữ lập trình C là một ngôn ngữ dạng biên dịch. Chương trình được viết bằng C muốn chạy được trên máy tính phải trải qua một quá trình biên dịch để chuyển đổi từ dạng mã nguồn sang chương trình dạng mã thực thi. Quá trình được chia ra làm 4 giai đoạn chính:
+
+- Giai đoàn tiền xử lý (Pre-processor)
+- Giai đoạn dịch NNBC sang Asembly (Compiler)
+- Giai đoạn dịch asembly sang ngôn ngữ máy (Asember)
+- Giai đoạn liên kết (Linker)
+- 
+[Compiler](compiler.PNG)
+
 
 </details>
 
