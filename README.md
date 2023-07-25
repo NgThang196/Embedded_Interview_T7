@@ -23,6 +23,23 @@
 - Biến mảng : `int a[]= {2, 6, 4, 8, 10};`
 - Biến con trỏ : `int *ptr = NULL;`
 
+### Cách hoạt động biến Static
+#### Đối với static cục bộ.
+- Được lưu ở phần vùng DATA nếu có khởi tạo giá trị hoặc phân vùng BSS nếu không khởi tạo giá trị và sẽ tồn tại hết vòng đời của chương trình.
+- Vẫn giữ nguyên giá trị và không bị thu hồi vùng nhớ.
+```c
+#include <stdio.h>
+void test(){
+    static int a = 1;  //0xc1. 
+    printf("a = %d\n", a);
+    a++;
+}
+int main(){
+    test();  // 1
+    test();  // 2. Vì là static nên sẽ không lấy lại giá trị ban đầu mà sẽ thực hiện lệnh tiếp theo.
+}
+```
+
 </details>
 
 <details>
