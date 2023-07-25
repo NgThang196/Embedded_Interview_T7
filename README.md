@@ -283,6 +283,12 @@ int main(){
 - Bộ nhớ RAM chứa rất nhiều ô nhớ, mỗi ô nhớ có kích thước 1 byte.
 - Mỗi ô nhớ có địa chỉ duy nhất và địa chỉ này được đánh số từ 0 trở đi. Nếu CPU 32 bit thì có 2^32 địa chỉ có thể đánh cho các ô nhớ trong RAM.
 
+![pointer](https://gochocit.com/wp-content/uploads/2021/09/dia-chi-don-vi-nho-duoc-danh-dia-chi.png)
+
+Khi khai báo biến, trình biên dịch dành riêng một vùng nhớ với địa chỉ duy nhất để lưu biến. Trình biên dịch có nhiệm vụ liên kết địa chỉ ô nhớ đó với tên biến. Khi gọi tên biến, nó sẽ truy xuất tự động đến ô nhớ đã liên kết với tên biến để lấy dữ liệu. Các bạn phải luôn phân biệt giữa địa chỉ bộ nhớ và dữ liệu được lưu trong đó.
+
+![pointer](https://gochocit.com/wp-content/uploads/2021/09/dia-chi-cua-bien-la-dia-chi-o-nho-dau-tien.png)
+
 ### Cú pháp con trỏ.
 `Kiểu_dữ_liệu* tên_con_trỏ`
 #### Ví dụ:
@@ -302,7 +308,34 @@ char b = 'c' // y là biến có kiểu dữ liệu ký tự
 int *ptr = &a; // ptr là con trỏ trỏ đến địa chỉ biến a và con trỏ phải là con trỏ kiểu dữ liệu số nguyên nên chương trình đúng.
 float *ptrr = &b // ptrr là con trỏ trỏ đến địa chỉ biến b nhưng mà con trỏ có kiểu dữ liệu khác kiểu dữ liệu biến b nên chương trình sai.
 ```
+### Kích thước con trỏ
+#### Ví dụ khai báo con trỏ:
+```c
+char *p1;
+int *p2;
+float *p3;
+double *p4;
+```
+Kích thước này của các biến con trỏ phụ thuộc vào môi trường hệ thống máy tính:
+- Môi trường MS-DOS 16 bit: 2 bytes
+- Môi trường Windows 32 bit: 4 bytes
+- Môi trường Windows 64 bit: 8 bytes
+#### Chương trình xem kích thước con trỏ
+```c
+#include <stdio.h>
 
+int main() {
+	char *p1;
+	int *p2;
+	float *p3;
+	double *p4;
+	printf("Size of char type pointer: %lu\n bytes",sizeof(char *));   // 8 bytes
+    printf("Size of int type pointer: %lu\n bytes",sizeof(int *));     // 8 bytes
+    printf("Size of float type pointer: %lu\n bytes",sizeof(float *)); // 8 bytes
+    printf("Size of double type pointer: %lu\n bytes",sizeof(double *));// 8 bytes
+	return 0;
+}
+```
 ### Con trỏ NULL
 
 Con trỏ NULL là con trỏ có địa chỉ 0x00 đây là con trỏ ứng dụng rất nhiều vào các dự án thực tế vì tính ổn định và dễ kiểm soát chương trình và khi các biến con trỏ mà ta không sử dụng thì nên gán NULL.
@@ -311,6 +344,7 @@ Con trỏ NULL là con trỏ có địa chỉ 0x00 đây là con trỏ ứng d�
 ```c
 int *ptr; // đây là con trỏ chưa khởi tạo và trỏ đến một địa chỉ bất kì.
 int *ptrr = NULL; // đây là con trỏ có giá trị 0x00.
+int *ptrrr = null; // là sai, null phải viết hoa 
 ```
 ### Pointer to Pointer
 
@@ -495,6 +529,12 @@ int main(){
     return 0;
 }
 ```
+### Sự khác nhau giữa bộ nhớ Heap và bộ nhớ Stack
+- Bộ nhớ Heap và bộ nhớ Stack bản chất đều cùng là vùng nhớ được tạo ra và lưu trữ trong RAM khi chương trình được thực thi.
+- Bộ nhớ Stack được dùng để lưu trữ các biến cục bộ trong hàm, tham số truyền vào... Truy cập vào bộ nhớ này rất nhanh và được thực thi khi chương trình được biên dịch.
+- Vùng nhớ Stack được quản lý bởi hệ điều hành, dữ liệu được lưu trong Stack sẽ tự động hủy khi hàm thực hiện xong công việc của mình.
+- Bộ nhớ Heap được dùng để lưu trữ vùng nhớ cho những biến con trỏ được cấp phát động bởi các hàm malloc - calloc - realloc (trong C). 
+- Nếu liên tục cấp phát vùng nhớ mà không giải phóng thì sẽ bị lỗi tràn vùng nhớ Heap (Heap overflow).
 
 </details>
 
@@ -669,6 +709,11 @@ int main(int argc, char const* argv[])
     return 0;
 }
 ```
+### So sánh Struct và Union
+Về mặt ý nghĩa, struct và union cơ bản giống nhau. Tuy nhiên, về mặt lưu trữ trong bộ nhớ, chúng có sự khác biệt rõ rệt như sau:
+- struct: Dữ liệu của các thành viên của struct được lưu trữ ở những vùng nhớ khác nhau. Do đó kích thước của 1 struct tối thiểu bằng kích thước các thành viên cộng lại tại vì còn phụ thuộc vào bộ nhớ đệm (struct padding)
+- Union : Dữ liệu các thành viên sẽ dùng chung 1 vùng nhớ. Kích thước của union được tính là kích thước lớn nhất của kiểu dữ liệu trong union. Việc thay đổi nội dung của 1 thành viên sẽ dẫn đến thay đổi nội dung của các thành viên khác.
+
 </details>
 
 <details>
@@ -682,7 +727,7 @@ Quy trình dịch là quá trình chuyển đổi từ ngôn ngữ bậc cao (NN
 - Giai đoạn dịch asembly sang ngôn ngữ máy (Asember)
 - Giai đoạn liên kết (Linker)
 
-![Compiler](compiler.PNG)
+![Compiler](https://media.geeksforgeeks.org/wp-content/uploads/20230404112946/Compilation-Process-in-C.png)
 
 1. Giai đoạn tiền xử lý – Preprocessor
 - Nhận mã nguồn
