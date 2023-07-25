@@ -319,15 +319,66 @@ Là một con trỏ trỏ đến địa chỉ của một con trỏ khác. Sử 
  int a = 20;
  int *ptr = &a;
  int **ptp = &ptr;
- printf("Gia tri của a la: %d\n, *ptr"); // a = 10;
- printf("Dia chi của a la: %d\n", ptr); // Địa chỉ a: 0x
- printf("Gia tri cua a la: %d\n", **ptp); // a = 10;
- printf("Dia chi cua a la: %d\n", ptp); // Địa chỉ a: 0x
+ printf("Gia tri của a la: %d\n", *ptr); // a = 20
+ printf("Dia chi của a la: %d\n", ptr); // Địa chỉ a la: 0061FF18 
+ printf("Gia tri cua a la: %d\n", **ptp); // a = 20
+ printf("Dia chi cua a la: %d\n", ptp); // Địa chỉ a: 0061FF14
 ```
 
 ### Con trỏ hàm
-
-
+- Con trỏ hàm dùng để trỏ đến địa chỉ của các hàm.
+- Cú pháp: `kiểu trả về(*tên con trỏ)(intput-parameter)`
+#### Ví dụ:
+```c
+#include <stdio.h>
+int tong (int a, int b){
+    printf("Tong %d va %d la: %d", a, b, a+b);
+    return a+b;
+}
+float tich(float a, float b){
+    return a*b;
+}
+int main(){
+    int(*ptr)(int,int); // Con trỏ hàm
+    ptr = &tong;
+    ptr(2,5); //Tong 2 va 5 la 7
+    float(*ptrTich)(float,float) = &tich;
+    printf("Tich la: %d\n", ptrTich(3,3)); //Tich la: 9
+    return 0;
+}
+```
+### Sử dụng con trỏ hàm như một Input Parameter
+```c
+#include<stdio.h>
+void tong (int a, int b){
+    printf("Tong %d va %d la: %d",a ,b, a+b);
+}
+void tinhtoan(void(*ptrTinhToan)(int,int), int a, int b){
+    printf("Tinh toan\n");
+    ptrTinhToan(a,b);
+}
+int main(){
+    tinhtoan(&tong, 3, 4); //Tong 3 va 4 la: 7
+    return 0;
+}
+```
+### Sử dụng con trỏ hàm trong một mảng
+```c
+#include<stdio.h>
+void tong (int a, int b){
+    printf("Tong %d va %d la: %d",a ,b, a+b);
+}
+void hieu (int a, int b){
+    printf("Hieu %d va %d la: %d", a, b, a-b);
+}
+int main(){
+    
+    void *ptr[]={&tong, &hieu};
+    ((void(*)(int ,int))ptr[0])(2,3); // Tong 2 va 3 la 5
+    ((void(*)(int ,int))ptr[1])(5,2); // Hieu 5 va 2 la 3
+    return 0;
+}
+```
 
 </details>
 
