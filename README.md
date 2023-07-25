@@ -1,78 +1,25 @@
 ## PROGRAMMING C
 
-
-
-
 <details>
 
-<summary>Biến</summary>
+<summary>C cơ bản</summary>
 
-- Một biến trong C là tên của vị trí bộ nhớ. Nó được sử dụng để lưu trữ dữ liệu. Giá trị của nó có thể được thay đổi và nó có thể được sử dụng lại nhiều lần. Mỗi biến trong C có một loại dữ liệu cụ thể, xác định kích thước của bộ nhớ của biến; phạm vi các giá trị có thể được lưu trữ trong bộ nhớ đó.Tên của một biến có thể bao gồm các chữ cái, chữ số và ký tự gạch dưới
+### Sử dụng thư viện #include <stdint.h>
+- Một số kiểu dữ liệu thông dụng:
 
-## Cách khai báo cú pháp sử dụng biến
-
-`kiểu_dữ_liệu tên_biến = giá_trị;`
-
-##### Ví dụ:
-
-- Biến số nguyên : `int a = 10;`
-- Biến số thực (dấu chấm động có độ chính xác đơn)   : `float a = 10.3;`
-- Biến số thực (dấu chấm động độ chính xác kép): `double a = 1.2345;`
-- Biến ký tự     : `char a = 'abc';`
-- Biến boolean   : `int True = 1;`
-- Biến mảng : `int a[]= {2, 6, 4, 8, 10};`
-- Biến con trỏ : `int *ptr = NULL;`
-
-## Cách hoạt động biến Static
-### Đối với static cục bộ.
-- Được lưu ở phần vùng DATA nếu có khởi tạo giá trị hoặc phân vùng BSS nếu không khởi tạo giá trị và sẽ tồn tại hết vòng đời của chương trình.
-- Vẫn giữ nguyên giá trị và không bị thu hồi vùng nhớ.
-##### Ví dụ:
-```c
-#include <stdio.h>
-void test(){
-    static int a = 1;  //0xc1. 
-    printf("a = %d\n", a);
-    a++;
-}
-int main(){
-    test();  // 1
-    test();  // 2. Vì là static nên sẽ không lấy lại giá trị ban đầu mà sẽ thực hiện lệnh tiếp theo.
-}
-```
-### Đối với static toàn cục
-- Static toàn cục chỉ được sử dụng trong file.c chứa nó mà thôi, không thể truy cập sang các file.c khác trong 1 folder.
-##### Ví dụ:
-- trong File chứa:
-`main.c`
-```c
-#include <stdio.h>
-
-extern void test(); //extern sử dụng để lấy dữ liệu từ file test.c
-
-extern int a;// Lỗi vì không thể lấy biến a từ test.c do static toàn cục.Nếu trong test.c thay static int a = 1 thành int a = 1 thì chương trình đúng.
-
-int main(){
-    test(); // a = 1
-    a = 10  // a = 10
-    test(); // a = 11
-    return 0;
-}
-```
-`test.c`
-```c
-#include <stdio.h>
-
-static int a = 1; //Static toàn cục -> DATA
-//int a=1;
-void test(){
-    printf("a=%d\n", a); 
-    a++;
-}
-```
-
+	| Name | Type | Range | 
+  	|:-------:|:--------:|:--------:|
+  	|int8|1 byte signed|-128 to 127|
+	|uint8_t |1 byte unsgined|0 to 255|
+	|int16_t |2 bytes signed|-32768 to 32767|
+    |uint16_t|2 byte unsigned|0 to 65535|
+    |int32_t |2 byte unsigned|-2147483648 to 2147483647|
+    |uint32_t|4 bytes unsigned|0 to 4294967295|
+    |int64_t |8 bytes signed|-9223372036854775808 to 9223372036854775807|
+    |uint64_t|8 bytes unsigned|0 to 18446744073709551615|
+- int8_t là kiểu dữ liệu số nguyên có dấu với độ lớn 8 bits (bit là đơn vị lưu trữ nhỏ nhất trong máy tính), và 1 byte độ lớn vùng nhớ máy tính tương đương với 8 bits. Tương tự cho các kiểu dữ liệu khác như int64_t là kiểu số nguyên 8 bytes (64 bits bằng 8 bytes).
+- uint8_t là kiểu dữ liệu số nguyên không dấu có range là 2^8 = 256 - 1 = 0 to 255.
 </details>
-
 <details>
 
 <summary>Pointer</summary>
@@ -242,6 +189,77 @@ int main(){
 ```
 
 </details>
+
+<details>
+
+<summary>Biến</summary>
+
+- Một biến trong C là tên của vị trí bộ nhớ. Nó được sử dụng để lưu trữ dữ liệu. Giá trị của nó có thể được thay đổi và nó có thể được sử dụng lại nhiều lần. Mỗi biến trong C có một loại dữ liệu cụ thể, xác định kích thước của bộ nhớ của biến; phạm vi các giá trị có thể được lưu trữ trong bộ nhớ đó.Tên của một biến có thể bao gồm các chữ cái, chữ số và ký tự gạch dưới
+
+## Cách khai báo cú pháp sử dụng biến
+
+`kiểu_dữ_liệu tên_biến = giá_trị;`
+
+##### Ví dụ:
+
+- Biến số nguyên : `int a = 10;`
+- Biến số thực (dấu chấm động có độ chính xác đơn)   : `float a = 10.3;`
+- Biến số thực (dấu chấm động độ chính xác kép): `double a = 1.2345;`
+- Biến ký tự     : `char a = 'abc';`
+- Biến boolean   : `int True = 1;`
+- Biến mảng : `int a[]= {2, 6, 4, 8, 10};`
+- Biến con trỏ : `int *ptr = NULL;`
+
+## Cách hoạt động biến Static
+### Đối với static cục bộ.
+- Được lưu ở phần vùng DATA nếu có khởi tạo giá trị hoặc phân vùng BSS nếu không khởi tạo giá trị và sẽ tồn tại hết vòng đời của chương trình.
+- Vẫn giữ nguyên giá trị và không bị thu hồi vùng nhớ.
+##### Ví dụ:
+```c
+#include <stdio.h>
+void test(){
+    static int a = 1;  //0xc1. 
+    printf("a = %d\n", a);
+    a++;
+}
+int main(){
+    test();  // 1
+    test();  // 2. Vì là static nên sẽ không lấy lại giá trị ban đầu mà sẽ thực hiện lệnh tiếp theo.
+}
+```
+### Đối với static toàn cục
+- Static toàn cục chỉ được sử dụng trong file.c chứa nó mà thôi, không thể truy cập sang các file.c khác trong 1 folder.
+##### Ví dụ:
+- trong File chứa:
+`main.c`
+```c
+#include <stdio.h>
+
+extern void test(); //extern sử dụng để lấy dữ liệu từ file test.c
+
+extern int a;// Lỗi vì không thể lấy biến a từ test.c do static toàn cục.Nếu trong test.c thay static int a = 1 thành int a = 1 thì chương trình đúng.
+
+int main(){
+    test(); // a = 1
+    a = 10  // a = 10
+    test(); // a = 11
+    return 0;
+}
+```
+`test.c`
+```c
+#include <stdio.h>
+
+static int a = 1; //Static toàn cục -> DATA
+//int a=1;
+void test(){
+    printf("a=%d\n", a); 
+    a++;
+}
+```
+
+</details>
+
 
 <details>
 
