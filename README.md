@@ -605,7 +605,48 @@ void test(){
     a++;
 }
 ```
+### Biến register
+- Biến register được sử dụng để tối ưu tốc độ xử lý chương trình, khi khai báo biến này thì nó sẽ thực thi sang bộ xử lý trung tâm ALU, sau khi ALU tính toán xong sẽ trả kết quả về cho Register.
+#### Ví dụ:
+```c
+#include <stdio.h>
+#include <time.h>
 
+int main()
+{
+    clock_t start, end;
+    double test;
+    register int i; // time: 1.256000
+    int i;          // time: 7.634000
+    start = clock()
+    for (i = 0; i < 0xFFFFFFFF; i++);
+    end = clock();
+    test = ((double)(end - start))/CLOCKS_PER_SEC;
+    printf("time: %f\n", test);
+    return 0;
+}
+```
+### Biến Volatile
+- Biến volatile được sử dụng để tránh việc lập lại của biến chứ volatile nhầm tối ưu chương trình, nó chỉ khởi tạo và chạy ban đầu sau khi lặp lại bước tiếp theo sẽ bỏ qua biến chứa volatie.
+#### Ví dụ:
+```c
+#include <stdio.h>
+void A(){
+}
+void B(){
+}
+int main()
+{
+
+    while(<1){
+        volatile int var; //Chương trình chạy biến var,sau lần tiếp theo sẽ bỏ qua
+        A();             
+        B();
+    }
+    return 0;
+}
+```
+Trong lập trình nhúng, chúng ta hay gặp đoạn code khi ta khai báo 1 biến đếm count, mỗi khi bấm nút xảy ra ngắt ngoài, chúng ta tăng biến đếm count. Tuy nhiên, khi chúng ta bật tính năng tối ưu code của compiler, nó sẽ hiểu rằng các biến như vậy dường như không thay đổi giá trị bởi phần mềm nên compiler có xu hướng loại bỏ biến count để có thể tối ưu kích cỡ file code chạy được sinh ra.
 </details>
 
 
