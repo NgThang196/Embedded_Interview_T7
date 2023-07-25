@@ -9,7 +9,7 @@
 
 - Một biến trong C là tên của vị trí bộ nhớ. Nó được sử dụng để lưu trữ dữ liệu. Giá trị của nó có thể được thay đổi và nó có thể được sử dụng lại nhiều lần. Mỗi biến trong C có một loại dữ liệu cụ thể, xác định kích thước của bộ nhớ của biến; phạm vi các giá trị có thể được lưu trữ trong bộ nhớ đó.Tên của một biến có thể bao gồm các chữ cái, chữ số và ký tự gạch dưới
 
-### Cách khai báo cú pháp sử dụng biến
+## Cách khai báo cú pháp sử dụng biến
 
 `kiểu_dữ_liệu tên_biến = giá_trị;`
 
@@ -23,10 +23,11 @@
 - Biến mảng : `int a[]= {2, 6, 4, 8, 10};`
 - Biến con trỏ : `int *ptr = NULL;`
 
-### Cách hoạt động biến Static
-#### Đối với static cục bộ.
+## Cách hoạt động biến Static
+### Đối với static cục bộ.
 - Được lưu ở phần vùng DATA nếu có khởi tạo giá trị hoặc phân vùng BSS nếu không khởi tạo giá trị và sẽ tồn tại hết vòng đời của chương trình.
 - Vẫn giữ nguyên giá trị và không bị thu hồi vùng nhớ.
+##### Ví dụ:
 ```c
 #include <stdio.h>
 void test(){
@@ -37,6 +38,36 @@ void test(){
 int main(){
     test();  // 1
     test();  // 2. Vì là static nên sẽ không lấy lại giá trị ban đầu mà sẽ thực hiện lệnh tiếp theo.
+}
+```
+### Đối với static toàn cục
+- Static toàn cục chỉ được sử dụng trong file.c chứa nó mà thôi, không thể truy cập sang các file.c khác trong 1 folder.
+##### Ví dụ:
+- trong File chứa:
+`main.c`
+```c
+#include <stdio.h>
+
+extern void test(); //extern sử dụng để lấy dữ liệu từ file test.c
+
+extern int a;// Lỗi vì không thể lấy biến a từ test.c do static toàn cục.Nếu trong test.c thay static int a = 1 thành int a = 1 thì chương trình đúng.
+
+int main(){
+    test(); // a = 1
+    a = 10  // a = 10
+    test(); // a = 11
+    return 0;
+}
+```
+`test.c`
+```c
+#include <stdio.h>
+
+static int a = 1; //Static toàn cục -> DATA
+//int a=1;
+void test(){
+    printf("a=%d\n", a); 
+    a++;
 }
 ```
 
