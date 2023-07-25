@@ -19,6 +19,261 @@
     |uint64_t|8 bytes unsigned|0 to 18446744073709551615|
 - int8_t là kiểu dữ liệu số nguyên có dấu với độ lớn 8 bits (bit là đơn vị lưu trữ nhỏ nhất trong máy tính), và 1 byte độ lớn vùng nhớ máy tính tương đương với 8 bits. Tương tự cho các kiểu dữ liệu khác như int64_t là kiểu số nguyên 8 bytes (64 bits bằng 8 bytes).
 - uint8_t là kiểu dữ liệu số nguyên không dấu có range là 2^8 = 256 - 1 = 0 to 255.
+
+### Sử dụng Typedef
+- Typedef được sử dụng để cung cấp kiểu cho một tên mới.
+
+ `typedef unsigned char BYTE;`
+- Sau khi gán typedef, `BYTE` có thể được sử dụng như là viết tắt cho `unsigned char`
+
+`BYTE b1, b2;`
+
+#### Ví dụ:
+```c
+#include <stdio.h>
+typedef float typefloat;
+int main(){
+    typefloat a = 10.3; 
+    printf("a=%f\n", a); // a=10.3
+    return 0;
+}
+```
+### Sử dụng function
+- Dùng để tạo ra các chương trình con, khi sử dụng ta chỉ cần gọi function() vào hàm main();
+
+#### Ví dụ:
+```c
+#include <stdio.h>
+void tich(int a, int b){  //Đây là hàm tich()
+    printf("Tich %d va %d la %d",a, b, a*b);
+}
+int tong(int c, int d){ //Hàm này có kiểu trả về là int
+    return c+d;
+}
+int main(){
+    tich(2,3); // tich 2 va 3 la 6
+    printf("Tong c va d la %d",tong(4,5)); //Tong c va d la 9
+    return 0;
+}
+```
+### Vòng lặp for
+- Vòng lặp for là cấu trúc điều khiển lặp được dùng để thực hiện một lệnh hay một khối lệnh với số lần lặp được xác định
+```c
+    for(khởi tạo giá trị biến lặp; điều kiện lặp; cập nhật biến lặp){
+        //Các lệnh cần lặp
+    }
+```
+#### Ví dụ:
+```c
+#include<stdio.h>
+
+int main(){
+    for(int i = 0; i<3; i++){
+        printf("%d ", i); // 0 1 2.
+    };
+    return 0;
+}
+```
+### Lệnh Break
+- Lệnh break là điều kiện dùng để thoát lệnh chương trình trong một vòng lặp.
+#### Ví dụ:
+```c
+#include <stdio.h>
+int main(){
+    uint8_t i = 0;
+    for(;;i++)
+    {
+        if(i>4)break;
+        printf("%d ", i); //0 1 2 3 4.
+    }
+    return 0;
+}
+```
+### Lệnh continue
+- Lệnh continue hoạt động giống câu lệnh break. Thay vì buộc kết thúc vòng lặp, nó buộc trở về kiểm tra điều kiện để thực hiện vòng lặp tiếp theo và bỏ qua các lệnh bên trong vòn lặp hiện tại sau lệnh continue.
+#### Ví dụ:
+```c
+#include<stdio.h>
+
+int main(){
+    for(int i = 0; i < 5; i++){
+        if(i==2) continue;
+        printf("%d ", i); // 0 1 3 4
+    }
+    return 0;
+}
+```
+### Vòng lặp While
+- Vòng lặp while được sử dụng để lặp một phần của chương trình một vài lần. Nếu số lần lặp không được xác định trước thì vòng lặp lặp while được khuyến khích sử dụng trong trường hợp này.
+#### Ví dụ
+```c
+#include <stdio.h>
+int main(){
+    int i = 0;
+    while (i<10>){
+        printf("i: %d ", i);  // 0 1 2 3 4 5 6 7 8 9
+        i++;
+    }
+    return 0;
+}
+```
+### Vòng lặp Do-While
+- Vòng lặp Do-While sẽ chạy chương trình trong do {} trước bất kể điều kiện đúng hay sai. Sau khi chạy chương trình xong sẽ kiểm tra điều kiện while().
+#### Ví dụ:
+```c
+#include <stdio.h>
+int main(){
+    int i = 0;
+    do{
+        printf("i = %d ", i); // 0 1 2 3 4
+        i++;
+    }while(i<5);
+}
+```
+### Mệnh đề If_Else.
+- Mệnh đề If-else được sử dụng để kiểm tra một biểu thức điều kiện nào đó có đúng hay không, nếu đúng thì thực thi những câu lệnh bên trong khối lệnh if và ngược lại nếu sai thì nó sẽ bỏ qua những câu lệnh đó.
+1. Mệnh đề if
+```c
+ if (condition) {  
+  // khối
+   lệnh này được thực thi nếu condition = true
+}
+```
+#### Ví dụ
+```c
+#include <stdio.h>
+int main () {
+   int num = 10;
+        if (num % 2 == 0) {
+            printf("num la so chan."); //num la so chan
+        }   
+   return 0;
+}
+```
+2. Mệnh đề if-else
+```c
+if (condition) {  
+  // khối lệnh này được thực thi nếu condition = true
+} else {
+  // khối lệnh này được thực thi nếu condition = false
+}
+```
+#### Ví dụ:
+```c
+#include <stdio.h>
+int main() {
+    int num = 11;
+    if (num % 2 == 0) {
+        printf("num la so chan.");
+    } else {
+        printf("num la so le.");   //num la so le
+    }
+    return 0;
+}
+```
+3. Mệnh đề if-elseif-else
+```c
+if (condition1) {  
+  // khối lệnh này được thực thi nếu condition1 = true
+} else if (condition2) {
+  // khối lệnh này được thực thi nếu condition1 = false và condition2 = true
+...
+} else {
+  // khối lệnh này được thực thi nếu nếu tất cả những điều kiện trên = false
+}
+```
+#### Ví dụ:
+```c
+#include <stdio.h>
+ 
+int main() {
+    int num;
+    printf("Nhap 1 so de kiem tra thang diem:");
+    scanf("%d", &num);
+    if (num < 0 || num >= 100) {
+        printf("Ban nen nhap so tu 1 den 100");
+    } else if (num > 0 && num < 50) {
+        printf("Fail");
+    } else if (num >= 50 && num < 60) {
+        printf("D Grade");
+    } else if (num >= 60 && num < 70) {
+        printf("C Grade");
+    } else if (num >= 70 && num < 80) {
+        printf("B Grade");
+    } else if (num >= 80 && num < 90) {
+        printf("A Grade");
+    } else if (num >= 90 && num <= 100) {
+        printf("A+ Grade");
+    }
+    return 0;
+    //Nhap 1 so de kiem tra thang diem: 80
+    //A Grade
+    //Nhap 1 so de kiem tra thang diem: 101
+    //Ban nen nhap so tu 1 den 100
+}
+```
+### Enum và Swich-Case
+- Switch-Case tương tự if-else và khi sử dụng switch-case cho hiệu năng tốt hơn.
+```c
+switch (expression)
+​{
+   case constant1:
+     // statements
+     break;
+   case constant2:
+     // statements
+     break;
+   .
+   .
+   .
+   default:
+     // default statements
+}
+```
+- Enum là kiểu dữ liệu cố định, chỉ cho phép biến nhận số số giá trị nhất định nào đó. Các giá trị enum có thể coi là một hằng số. Việc sử dụng enum giúp đảm bảo giá trị các biến chỉ nhận các giá trị mong đợi.
+```c
+enum enum_name{constant1, constant2, constant3, .......};
+```
+#### Ví dụ về sự kết hợp giữa enum và switch case.
+```c
+#include <stdio.h>
+typedef enum{
+    Thu2,
+    Thu3,
+    Thu4,
+    Thu5,
+    Thu6,
+    Thu7,
+    CN
+}Thu;
+int main(){
+    Thu thu = Thu2;
+    switch(thu){
+    case Thu2;
+        printf("Thu 2\n");
+        break;
+    case Thu3;
+        printf("Thu 3\n");
+        break;    
+    case Thu4;
+        printf("Thu 4\n");
+        break;
+    case Thu5;
+        printf("Thu 5\n");
+        break;
+    case Thu6;
+        printf("Thu 6\n");
+        break;
+    case Thu7;
+        printf("Thu 7\n");
+        break; 
+    case CN;
+        printf("CN\n");
+        break;                      
+    }
+    return 0;
+}
+```
 </details>
 <details>
 
