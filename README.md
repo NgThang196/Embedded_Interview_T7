@@ -280,6 +280,8 @@ int main(){
 <summary>Pointer</summary>
 
 - là biến dùng để trỏ đến địa chỉ của một biến khác chứa giá trị của biến đó.
+- Bộ nhớ RAM chứa rất nhiều ô nhớ, mỗi ô nhớ có kích thước 1 byte.
+- Mỗi ô nhớ có địa chỉ duy nhất và địa chỉ này được đánh số từ 0 trở đi. Nếu CPU 32 bit thì có 2^32 địa chỉ có thể đánh cho các ô nhớ trong RAM.
 
 ### Cú pháp con trỏ.
 `Kiểu_dữ_liệu* tên_con_trỏ`
@@ -679,8 +681,30 @@ Quy trình dịch là quá trình chuyển đổi từ ngôn ngữ bậc cao (NN
 - Giai đoạn dịch NNBC sang Asembly (Compiler)
 - Giai đoạn dịch asembly sang ngôn ngữ máy (Asember)
 - Giai đoạn liên kết (Linker)
-- 
+
 ![Compiler](compiler.PNG)
+
+1. Giai đoạn tiền xử lý – Preprocessor
+- Nhận mã nguồn
+- Xóa bỏ tất cả chú thích, comments của chương trình
+- Chỉ thị tiền xử lý (bắt đầu bằng #) cũng được xử lý
+
+Ví dụ: chỉ thị #include cho phép ghép thêm mã chương trình của một tệp tiêu để vào mã nguồn cần dịch. Các hằng số được định nghĩa bằng #define sẽ được thay thế bằng giá trị cụ thể tại mỗi nơi sử dụng trong chương trình.
+
+2. Công đoạn dịch Ngôn Ngữ Bậc Cao sang Assembly.
+- Phân tích cú pháp (syntax) của mã nguồn NNBC
+- Chuyển chúng sang dạng mã Assembly là một ngôn ngữ bậc thấp (hợp ngữ) gần với tập lệnh của bộ vi xử lý.
+
+3. Công đoạn dịch Assembly.
+- Dich chương trình => Sang mã máy 0 và 1
+- Một tệp mã máy (.obj) sinh ra trong hệ thống sau đó.
+
+4. Giai đoạn Linker
+
+- Trong giai đoạn này mã máy của một chương trình dịch từ nhiều nguồn (file .c hoặc file thư viện .lib) được liên kết lại với nhau để tạo thành chương trình đích duy nhất
+- Mã máy của các hàm thư viện gọi trong chương trình cũng được đưa vào chương trình cuối trong giai đoạn này.
+- Chính vì vậy mà các lỗi liên quan đến việc gọi hàm hay sử dụng biến tổng thể mà không tồn tại sẽ bị phát hiện. Kể cả lỗi viết chương trình chính không có hàm main() cũng được phát hiện trong liên kết.
+- Kết thúc quá trình tất cả các đối tượng được liên kết lại với nhau thành một chương trình có thể thực thi được (executable hay .exe) thống nhất.
 
 
 </details>
