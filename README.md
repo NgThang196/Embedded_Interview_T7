@@ -680,7 +680,7 @@ Quy trình dịch là quá trình chuyển đổi từ ngôn ngữ bậc cao (NN
 - Giai đoạn dịch asembly sang ngôn ngữ máy (Asember)
 - Giai đoạn liên kết (Linker)
 - 
-[Compiler](compiler.PNG)
+![Compiler](C:\Users\Nguyen Van Thang\Desktop\compiler.PNG)
 
 
 </details>
