@@ -188,6 +188,7 @@ int main(){
     for(int i = 0; i < 7; i++){
         printf("i = %d\n", ptr[i]);
     }
+    free(ptr); //Thu hồi vùng nhớ
     return 0;
 }
 ```
