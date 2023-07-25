@@ -100,15 +100,16 @@ Là một con trỏ trỏ đến địa chỉ của một con trỏ khác. Sử 
 ##### Ví dụ
 ```c
 #include <stdio.h>
-const int i = 10;  // Biến i được lưu ở phân vùng text
+const int i = 10;  // Biến i được lưu ở phân vùng text, chỉ đọc và không thể thay đổi giá trị
 int main(){
+    printf("i = %d\n, i");
     return 0;
 }
 ```
 ##### Data:
 - Quyền truy cập là read-write.
 - Chứa biến toàn cục or biến static với giá trị khởi tạo khác không.
-- Được giải phóng khi kết thúc chương trình.
+- Được giải phóng khi kết thúc chương trình. 
 ##### Ví dụ
 ```c
 #include <stdio.h>
@@ -118,7 +119,9 @@ void test(){
     static int c = 30; //Static cục bộ(tức là nằm trong hàm), được lưu ở phân vùng DATA
 }
 int main(){
+    printf("%d\n%d", a, b);
     test();
+    //Khi thoát chương trình thì các biến này sẽ bị thu hồi lại.
     return 0;
 }
 ```
@@ -129,10 +132,14 @@ int main(){
 ##### Ví dụ
 ```c
 #include <stdio.h>
-    int a = 0;    //Khởi tạo bằng 0
-                        //ĐƯỢC LƯU Ở PHÂN VÙNG BSS, KHỞI TẠO NGAY LẦN ĐẦU
-    static int b; //Không khởi tạo
+    int a = 0;    //Khởi tạo bằng 0 -> BSS
+    static int b; //Static toàn cục không khởi tạo -> BSS
+void test(){
+    static int c; //Static cục bộ không khởi tạo -> BSS
+}
 int main(){
+    printf("%d\n%d\n", a, b);
+    test();
     return 0;
 }
 ```
@@ -145,13 +152,15 @@ int main(){
 #include <stdio.h>
 void tong(int a, int b){        //int a, int b: InputParameter. Được lưu ở phân vùng Stack
     int c;                      //int c: Biến cục bộ. Được lưu ở phân vùng stack
-    c = a+b;
+    c=a+b;
+    printf("Tong a va b: %d\n", a+b);
     printf("dia chi a: %p\n", &a);
     printf("dia chi b: %p\n", &b);
     printf("dia chi c: %p\n", &c);
 }
 int main(){
-    tong(5, 6);
+    tong(5, 6); // Khởi tạo int a = 5, int b = 6, int c và có các địa chỉ tương ứng
+    tong(2, 5); // Thu hồi địa chỉ các biến a,b,c của phép tính tong(5,6) và khởi tạo lại sử dụng lại các địa chỉ đó.
     return 0;
 }
 ```
@@ -162,8 +171,16 @@ int main(){
 ##### Ví dụ
 ```c
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(){
+    uint16_t *ptr = (uint16_t *)malloc(10); //Cần 5 ô nhớ và uint16_t -> 2 byte/1 ô nhớ. Vậy malloc cần 10 byte.
+    for(int i = 0; i < 5; i++){
+        ptr[i] = 2*i;
+    }
+    for(int i = 0; i < 5; i++){
+        printf("i = %d`n", ptr[i]);
+    }
     return 0;
 }
 ```
