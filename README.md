@@ -817,7 +817,7 @@ Ví dụ: chỉ thị #include cho phép ghép thêm mã chương trình của m
 
 <details>
 
-<summary>MacroFunction</summary>
+<summary>Macro-Inline-Function</summary>
 
 Macro:
 
