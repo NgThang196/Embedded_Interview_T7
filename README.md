@@ -285,7 +285,7 @@ int main(){
 
 ![pointer](https://gochocit.com/wp-content/uploads/2021/09/dia-chi-don-vi-nho-duoc-danh-dia-chi.png)
 
-Khi khai báo biến, trình biên dịch dành riêng một vùng nhớ với địa chỉ duy nhất để lưu biến. Trình biên dịch có nhiệm vụ liên kết địa chỉ ô nhớ đó với tên biến. Khi gọi tên biến, nó sẽ truy xuất tự động đến ô nhớ đã liên kết với tên biến để lấy dữ liệu.
+Khi khai báo biến, trình biên dịch dành riêng một vùng nhớ với địa chỉ duy nhất để lưu biến. Trình biên dịch có nhiệm vụ liên kết địa chỉ ô nhớ đó với tên biến. Khi gọi tên biến, nó sẽ truy xuất tự động đến ô nhớ đã liên kết với tên biến để lấy dữ liệu. Các bạn phải luôn phân biệt giữa địa chỉ bộ nhớ và dữ liệu được lưu trong đó.
 
 ![pointer](https://gochocit.com/wp-content/uploads/2021/09/dia-chi-cua-bien-la-dia-chi-o-nho-dau-tien.png)
 
@@ -330,9 +330,9 @@ int main() {
 	float *p3;
 	double *p4;
 	printf("Size of char type pointer: %lu\n bytes",sizeof(char *));   // 8 bytes
-	printf("Size of int type pointer: %lu\n bytes",sizeof(int *));     // 8 bytes
-	printf("Size of float type pointer: %lu\n bytes",sizeof(float *)); // 8 bytes
-	printf("Size of double type pointer: %lu\n bytes",sizeof(double *));// 8 bytes
+    printf("Size of int type pointer: %lu\n bytes",sizeof(int *));     // 8 bytes
+    printf("Size of float type pointer: %lu\n bytes",sizeof(float *)); // 8 bytes
+    printf("Size of double type pointer: %lu\n bytes",sizeof(double *));// 8 bytes
 	return 0;
 }
 ```
@@ -679,7 +679,7 @@ Trong lập trình nhúng, chúng ta hay gặp đoạn code khi ta khai báo 1 b
 <summary>StructUnion</summary>
 
 ## Struct
-- Struct là kiểu dữ liệu do người dùng tự định nghĩa
+- Struct là kiểu dữ liệu do người dùng tự định nghĩa. Dữ liệu của các thành viên của struct được lưu trữ ở những vùng nhớ khác nhau. Do đó kích thước của 1 struct tối thiểu bằng kích thước các thành viên cộng lại tại vì còn phụ thuộc vào bộ nhớ đệm (struct padding).
 ```c
 struct structureName 
 {
@@ -717,7 +717,7 @@ int main(){
 }
 ```
 ## Union
-- Union là kiểu dữ liệu do người dùng định nghĩa
+- Union là cũng tương tự struct, là kiểu dữ liệu do người dùng định nghĩa, nhưng có sự khác nhau.Union sẽ lấy dữ liệu các thành viên sẽ dùng chung 1 vùng nhớ. Kích thước của union được tính là kích thước lớn nhất của kiểu dữ liệu trong union. Việc thay đổi nội dung của 1 thành viên sẽ dẫn đến thay đổi nội dung của các thành viên khác.
 ```c
 union structureName 
 {
@@ -774,11 +774,6 @@ int main(int argc, char const* argv[])
     return 0;
 }
 ```
-### So sánh Struct và Union
-Về mặt ý nghĩa, struct và union cơ bản giống nhau. Tuy nhiên, về mặt lưu trữ trong bộ nhớ, chúng có sự khác biệt rõ rệt như sau:
-- struct: Dữ liệu của các thành viên của struct được lưu trữ ở những vùng nhớ khác nhau. Do đó kích thước của 1 struct tối thiểu bằng kích thước các thành viên cộng lại tại vì còn phụ thuộc vào bộ nhớ đệm (struct padding)
-- Union : Dữ liệu các thành viên sẽ dùng chung 1 vùng nhớ. Kích thước của union được tính là kích thước lớn nhất của kiểu dữ liệu trong union. Việc thay đổi nội dung của 1 thành viên sẽ dẫn đến thay đổi nội dung của các thành viên khác.
-
 </details>
 
 <details>
