@@ -652,7 +652,7 @@ int main()
 }
 ```
 ### Biến Volatile
-- Biến volatile được sử dụng để tránh việc lập lại của biến chứ volatile nhầm tối ưu chương trình, nó chỉ khởi tạo và chạy ban đầu sau khi lặp lại bước tiếp theo sẽ bỏ qua biến chứa volatie.
+- Biến volatile được sử dụng khi chương trình có sự lặp lại và khi có volatile hệ thống vi điều khiển sẽ không tối ưu phần này.
 #### Ví dụ:
 ```c
 #include <stdio.h>
