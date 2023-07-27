@@ -330,9 +330,9 @@ int main() {
 	float *p3;
 	double *p4;
 	printf("Size of char type pointer: %lu\n bytes",sizeof(char *));   // 8 bytes
-    printf("Size of int type pointer: %lu\n bytes",sizeof(int *));     // 8 bytes
-    printf("Size of float type pointer: %lu\n bytes",sizeof(float *)); // 8 bytes
-    printf("Size of double type pointer: %lu\n bytes",sizeof(double *));// 8 bytes
+	printf("Size of int type pointer: %lu\n bytes",sizeof(int *));     // 8 bytes
+	printf("Size of float type pointer: %lu\n bytes",sizeof(float *)); // 8 bytes
+	printf("Size of double type pointer: %lu\n bytes",sizeof(double *));// 8 bytes
 	return 0;
 }
 ```
