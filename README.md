@@ -110,7 +110,7 @@ int main(){
 #include <stdio.h>
 int main(){
     int i = 0;
-    while (i<10){
+    while (i<10>){
         printf("i: %d ", i);  // 0 1 2 3 4 5 6 7 8 9
         i++;
     }
@@ -285,7 +285,7 @@ int main(){
 
 ![pointer](https://gochocit.com/wp-content/uploads/2021/09/dia-chi-don-vi-nho-duoc-danh-dia-chi.png)
 
-Khi khai báo biến, trình biên dịch dành riêng một vùng nhớ với địa chỉ duy nhất để lưu biến. Trình biên dịch có nhiệm vụ liên kết địa chỉ ô nhớ đó với tên biến. Khi gọi tên biến, nó sẽ truy xuất tự động đến ô nhớ đã liên kết với tên biến để lấy dữ liệu. Các bạn phải luôn phân biệt giữa địa chỉ bộ nhớ và dữ liệu được lưu trong đó.
+Khi khai báo biến, trình biên dịch dành riêng một vùng nhớ với địa chỉ duy nhất để lưu biến. Trình biên dịch có nhiệm vụ liên kết địa chỉ ô nhớ đó với tên biến. Khi gọi tên biến, nó sẽ truy xuất tự động đến ô nhớ đã liên kết với tên biến để lấy dữ liệu. 
 
 ![pointer](https://gochocit.com/wp-content/uploads/2021/09/dia-chi-cua-bien-la-dia-chi-o-nho-dau-tien.png)
 
@@ -662,8 +662,8 @@ void B(){
 }
 int main()
 {
-    while(<1){
-        volatile int var; //Chương trình chạy biến var,sau lần tiếp theo sẽ bỏ qua
+    while(1){
+        volatile int var = 1; //Không được phép tối ưu.
         A();             
         B();
     }
