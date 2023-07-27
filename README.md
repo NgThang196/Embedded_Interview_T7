@@ -680,6 +680,7 @@ Trong lập trình nhúng, chúng ta hay gặp đoạn code khi ta khai báo 1 b
 
 ## Struct
 - Struct là kiểu dữ liệu do người dùng tự định nghĩa. Dữ liệu của các thành viên của struct được lưu trữ ở những vùng nhớ khác nhau. Do đó kích thước của 1 struct tối thiểu bằng kích thước các thành viên cộng lại tại vì còn phụ thuộc vào bộ nhớ đệm (struct padding).
+- Đối với kiến trúc 32 bit sẽ quét 4 bytes, 64 bit sẽ quét 8 bytes.
 ```c
 struct structureName 
 {
@@ -731,12 +732,12 @@ union structureName
 #include <stdio.h>
 #include <stdint.h>
 typedef union{
-    uint8_t var1;         //1 byte
-    uint16_t var2[10];    //2 bytes + 4 bytes
-    uint64_t var3;        //8 bytes
+    uint8_t var1;        
+    uint16_t var2[10];   
+    uint64_t var3[20];   
 }typeUnion;
 int main(){
-    printf("size: %lu\n",sizeof(typeUnion));
+    printf("size: %lu\n",sizeof(typeUnion)); // size: 160.
     return 0;
 }
 ```
